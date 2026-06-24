@@ -1,11 +1,11 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import apiRouter from './routes/index'
+import apiRouter from './routes/index.js'
 
 const app = express()
 app.use(express.json())
 
-const MONGO_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit'
+const MONGO_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db'
 const PORT = parseInt(process.env.PORT || '8000', 10)
 
 // Health check

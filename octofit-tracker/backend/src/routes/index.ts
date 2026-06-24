@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import users from './users'
-import teams from './teams'
-import activities from './activities'
-import leaderboard from './leaderboard'
-import workouts from './workouts'
+import users from './users.js'
+import teams from './teams.js'
+import activities from './activities.js'
+import leaderboard from './leaderboard.js'
+import workouts from './workouts.js'
 
 const router = Router()
 
