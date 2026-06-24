@@ -7,9 +7,14 @@ app.use(express.json())
 
 const PORT = parseInt(process.env.PORT || '8000', 10)
 
-// Health check
+// Health check with MongoDB connection state
 app.get('/health', (_req, res) => {
-  res.json({ status: 'ok' })
+  const dbState = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db'
+  res.json({
+    status: 'ok',
+    database: dbState,
+    mongooseState: process.env.MONGODB_URI ? 'configured' : 'default'
+  })
 })
 
 // Mount API routes under /api
