@@ -1,10 +1,10 @@
-import mongoose from 'mongoose'
+import { connectDb, disconnectDb, getMongoUri } from '../database.js'
 
 // Seed the octofit_db database with test data
 async function seed() {
-  const MONGO = 'mongodb://localhost:27017/octofit_db'
-  console.log('Seed the octofit_db database with test data')
-  await mongoose.connect(MONGO)
+  const uri = getMongoUri()
+  console.log(`Seed the database at ${uri}`)
+  await connectDb()
 
   // dynamically import models (works with ESM loader)
   const UserMod = await import(new URL('../models/user.ts', import.meta.url).href)
@@ -91,7 +91,7 @@ async function seed() {
   ])
   console.log({ users: uCount, teams: tCount, workouts: wCount, activities: aCount, leaderboard: lCount })
 
-  await mongoose.disconnect()
+  await disconnectDb()
 }
 
 seed().catch(err => {

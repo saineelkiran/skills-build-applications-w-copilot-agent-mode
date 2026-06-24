@@ -1,11 +1,10 @@
 import express from 'express'
-import mongoose from 'mongoose'
 import apiRouter from './routes/index.js'
+import { connectDb } from './database.js'
 
 const app = express()
 app.use(express.json())
 
-const MONGO_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db'
 const PORT = parseInt(process.env.PORT || '8000', 10)
 
 // Health check
@@ -18,8 +17,7 @@ app.use('/api', apiRouter)
 
 async function start() {
   try {
-    await mongoose.connect(MONGO_URL)
-    console.log('Connected to MongoDB')
+    await connectDb()
 
     // Codespaces-aware host and external URL
     const CODESPACE = process.env.CODESPACE_NAME
